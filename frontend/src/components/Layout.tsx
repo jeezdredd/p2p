@@ -99,6 +99,18 @@ export default function Layout() {
                 <p className="text-xs text-muted-foreground capitalize">{user?.role}</p>
               </div>
             </div>
+            {user?.is_staff && (
+              <a
+                href="http://localhost:8000/admin/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="block mb-2"
+              >
+                <Button variant="secondary" className="w-full">
+                  Admin Panel
+                </Button>
+              </a>
+            )}
             <Button
               variant="outline"
               className="w-full"

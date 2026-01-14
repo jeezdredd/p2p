@@ -16,7 +16,7 @@ class StudyMaterial(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField()
     file = models.FileField(upload_to='materials/', blank=True, null=True)
-    link = models.URLField(blank=True)
+    link = models.URLField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
