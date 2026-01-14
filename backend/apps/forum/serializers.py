@@ -11,7 +11,7 @@ class ReplySerializer(serializers.ModelSerializer):
     class Meta:
         model = Reply
         fields = ['id', 'discussion', 'author', 'parent', 'content', 'children', 'created_at', 'updated_at']
-        read_only_fields = ['id', 'author', 'created_at', 'updated_at']
+        read_only_fields = ['id', 'author', 'discussion', 'created_at', 'updated_at']
 
     def get_children(self, obj):
         children = obj.children.all()
