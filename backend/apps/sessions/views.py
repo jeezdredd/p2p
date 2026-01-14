@@ -1,8 +1,7 @@
-from rest_framework import generics, permissions, status
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.response import Response
+from rest_framework import generics, permissions
 from django_filters.rest_framework import DjangoFilterBackend
 from django.utils import timezone
+from django.db import models as db_models
 from .models import TutoringSession
 from .serializers import TutoringSessionSerializer
 
@@ -46,19 +45,6 @@ class CompletedSessionsView(generics.ListAPIView):
             status='completed'
         ).select_related('tutor', 'student', 'subject').order_by('-date')
 
-
-class MySessionsView(generics.ListAPIView):
-    serializer_class = TutoringSessionSerializer
-    permission_classes = [permissions.IsAuthenticated]
-
-    def get_queryset(self):
-        user = self.request.user
-        return TutoringSession.objects.filter(
-            models.Q(tutor=user) | models.Q(student=user)
-        ).select_related('tutor', 'student', 'subject')
-
-
-from django.db import models as db_models
 
 class MySessionsView(generics.ListAPIView):
     serializer_class = TutoringSessionSerializer
