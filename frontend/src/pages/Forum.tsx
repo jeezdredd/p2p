@@ -27,14 +27,14 @@ type DiscussionFormData = z.infer<typeof discussionSchema>
 export default function Forum() {
   const queryClient = useQueryClient()
   const [showForm, setShowForm] = useState(false)
-  const [filterSubject, setFilterSubject] = useState<string>('')
+  const [filterSubject, setFilterSubject] = useState<string>('all')
   const [searchQuery, setSearchQuery] = useState('')
 
   const { data: discussions, isLoading } = useQuery({
     queryKey: ['discussions', filterSubject, searchQuery],
     queryFn: () =>
       forumApi.list({
-        ...(filterSubject ? { subject: parseInt(filterSubject) } : {}),
+        ...(filterSubject && filterSubject !== 'all' ? { subject: parseInt(filterSubject) } : {}),
         ...(searchQuery ? { search: searchQuery } : {}),
       }),
   })
@@ -157,7 +157,7 @@ export default function Forum() {
             <SelectValue placeholder="Filter by subject" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All subjects</SelectItem>
+            <SelectItem value="all">All subjects</SelectItem>
             {subjectsList.map((subject) => (
               <SelectItem key={subject.id} value={subject.id.toString()}>
                 {subject.name}
