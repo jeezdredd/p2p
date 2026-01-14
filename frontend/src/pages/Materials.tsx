@@ -64,12 +64,31 @@ export default function Materials() {
   })
 
   const onSubmit = (data: MaterialFormData) => {
+    // Validate that either file or link is provided
+    if (!selectedFile && (!data.link || !data.link.trim())) {
+      toast({ 
+        title: 'Validation Error', 
+        description: 'Please provide either a file or a link',
+        variant: 'destructive' 
+      })
+      return
+    }
+
     const formData = new FormData()
     formData.append('subject', data.subject)
     formData.append('title', data.title)
     formData.append('description', data.description)
-    if (data.link) formData.append('link', data.link)
-    if (selectedFile) formData.append('file', selectedFile)
+    
+    // Only append link if it's not empty
+    if (data.link && data.link.trim()) {
+      formData.append('link', data.link.trim())
+    }
+    
+    // Only append file if selected
+    if (selectedFile) {
+      formData.append('file', selectedFile)
+    }
+    
     createMutation.mutate(formData)
   }
 
@@ -138,12 +157,18 @@ export default function Materials() {
                     type="file"
                     onChange={(e) => setSelectedFile(e.target.files?.[0] || null)}
                   />
+                  {selectedFile && (
+                    <p className="text-xs text-muted-foreground">Selected: {selectedFile.name}</p>
+                  )}
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="link">Or Link</Label>
                   <Input id="link" placeholder="https://..." {...register('link')} />
                 </div>
               </div>
+              <p className="text-sm text-muted-foreground">
+                * Provide either a file upload or a link to external resource
+              </p>
               <Button type="submit" disabled={createMutation.isPending}>
                 {createMutation.isPending ? 'Uploading...' : 'Upload Material'}
               </Button>

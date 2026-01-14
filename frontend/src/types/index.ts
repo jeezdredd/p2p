@@ -9,6 +9,8 @@ export interface User {
   avatar: string | null
   subjects: Subject[]
   date_joined: string
+  is_staff?: boolean
+  is_superuser?: boolean
 }
 
 export interface Subject {

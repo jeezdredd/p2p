@@ -20,7 +20,10 @@ class StudyMaterialSerializer(serializers.ModelSerializer):
         read_only_fields = ['id', 'author', 'created_at', 'updated_at']
 
     def validate(self, attrs):
-        if not attrs.get('file') and not attrs.get('link'):
+        file = attrs.get('file')
+        link = attrs.get('link', '').strip()
+        
+        if not file and not link:
             raise serializers.ValidationError('Either file or link must be provided')
         return attrs
 
