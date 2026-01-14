@@ -11,7 +11,7 @@ import { Label } from '@/components/ui/label'
 import { Textarea } from '@/components/ui/textarea'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { toast } from '@/components/ui/toaster'
-import { BookOpen, Link as LinkIcon, File, Plus, X, ExternalLink, Download } from 'lucide-react'
+import { BookOpen, Link as LinkIcon, File as FileIcon, Plus, X, ExternalLink, Download } from 'lucide-react'
 import type { StudyMaterial, Subject } from '@/types'
 
 const materialSchema = z.object({
@@ -185,7 +185,7 @@ export default function Materials() {
                 <div className="flex items-start gap-3">
                   <div className="h-10 w-10 rounded bg-primary/10 flex items-center justify-center shrink-0">
                     {material.file ? (
-                      <File className="h-5 w-5 text-primary" />
+                      <FileIcon className="h-5 w-5 text-primary" />
                     ) : (
                       <LinkIcon className="h-5 w-5 text-primary" />
                     )}
