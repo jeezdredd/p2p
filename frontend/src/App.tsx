@@ -11,7 +11,6 @@ import Support from '@/pages/Support'
 import Login from '@/pages/Login'
 import Register from '@/pages/Register'
 import { Toaster } from '@/components/ui/toaster'
-import AssistantChat from "./components/AssistantChat"
 
 function PrivateRoute({ children }: { children: React.ReactNode }) {
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated)
@@ -21,7 +20,6 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
 function App() {
   return (
     <>
-        <AssistantChat />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
