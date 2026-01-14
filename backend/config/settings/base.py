@@ -32,6 +32,7 @@ INSTALLED_APPS = [
     'apps.forum',
     'apps.support',
     'apps.notifications',
+    'apps.assistant'
 ]
 
 MIDDLEWARE = [
