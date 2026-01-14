@@ -5,6 +5,7 @@ import Dashboard from '@/pages/Dashboard'
 import Materials from '@/pages/Materials'
 import Sessions from '@/pages/Sessions'
 import SessionSchedule from '@/pages/SessionSchedule'
+import SessionEdit from '@/pages/SessionEdit'
 import Forum from '@/pages/Forum'
 import DiscussionDetail from '@/pages/DiscussionDetail'
 import Support from '@/pages/Support'
@@ -21,7 +22,7 @@ function PrivateRoute({ children }: { children: React.ReactNode }) {
 function App() {
   return (
     <>
-        <AssistantChat />
+      <AssistantChat />
       <Routes>
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
@@ -37,6 +38,7 @@ function App() {
           <Route path="materials" element={<Materials />} />
           <Route path="sessions" element={<Sessions />} />
           <Route path="sessions/new" element={<SessionSchedule />} />
+          <Route path="sessions/:id/edit" element={<SessionEdit />} />
           <Route path="forum" element={<Forum />} />
           <Route path="forum/:id" element={<DiscussionDetail />} />
           <Route path="support" element={<Support />} />

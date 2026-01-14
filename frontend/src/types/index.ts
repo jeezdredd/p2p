@@ -44,8 +44,27 @@ export interface TutoringSession {
   date: string
   time: string
   duration: number
-  status: 'scheduled' | 'completed' | 'cancelled'
+  status: 'pending' | 'scheduled' | 'completed' | 'cancelled'
   notes: string
+  confirmation_required: boolean
+  is_confirmed: boolean
+  confirmed_at: string | null
+  cancelled_by: number | null
+  cancelled_by_detail: User | null
+  cancellation_reason: string
+  max_students: number
+  review?: SessionReview
+  created_at: string
+  updated_at: string
+}
+
+export interface SessionReview {
+  id: number
+  session: number
+  reviewer: number
+  reviewer_detail: User
+  rating: number
+  comment: string
   created_at: string
   updated_at: string
 }

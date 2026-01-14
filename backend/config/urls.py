@@ -14,6 +14,7 @@ urlpatterns = [
     path('api/sessions/', include('apps.tutoring.urls')),
     path('api/discussions/', include('apps.forum.urls')),
     path('api/support/', include('apps.support.urls')),
+    path('api/assistant/', include('apps.assistant.urls')),
 ]
 
 if settings.DEBUG:
