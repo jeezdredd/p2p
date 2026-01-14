@@ -11,15 +11,15 @@ import { useState } from 'react'
 import type { TutoringSession, Subject, User as UserType } from '@/types'
 
 export default function Sessions() {
-  const [filterSubject, setFilterSubject] = useState<string>('')
-  const [filterTutor, setFilterTutor] = useState<string>('')
+  const [filterSubject, setFilterSubject] = useState<string>('all')
+  const [filterTutor, setFilterTutor] = useState<string>('all')
 
   const { data: upcomingSessions, isLoading: loadingUpcoming } = useQuery({
     queryKey: ['sessions', 'upcoming', filterSubject, filterTutor],
     queryFn: () =>
       sessionsApi.upcoming({
-        ...(filterSubject ? { subject: parseInt(filterSubject) } : {}),
-        ...(filterTutor ? { tutor: parseInt(filterTutor) } : {}),
+        ...(filterSubject && filterSubject !== 'all' ? { subject: parseInt(filterSubject) } : {}),
+        ...(filterTutor && filterTutor !== 'all' ? { tutor: parseInt(filterTutor) } : {}),
       }),
   })
 
@@ -27,8 +27,8 @@ export default function Sessions() {
     queryKey: ['sessions', 'completed', filterSubject, filterTutor],
     queryFn: () =>
       sessionsApi.completed({
-        ...(filterSubject ? { subject: parseInt(filterSubject) } : {}),
-        ...(filterTutor ? { tutor: parseInt(filterTutor) } : {}),
+        ...(filterSubject && filterSubject !== 'all' ? { subject: parseInt(filterSubject) } : {}),
+        ...(filterTutor && filterTutor !== 'all' ? { tutor: parseInt(filterTutor) } : {}),
       }),
   })
 
@@ -105,7 +105,7 @@ export default function Sessions() {
             <SelectValue placeholder="Filter by subject" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All subjects</SelectItem>
+            <SelectItem value="all">All subjects</SelectItem>
             {subjectsList.map((subject) => (
               <SelectItem key={subject.id} value={subject.id.toString()}>
                 {subject.name}
@@ -118,7 +118,7 @@ export default function Sessions() {
             <SelectValue placeholder="Filter by tutor" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All tutors</SelectItem>
+            <SelectItem value="all">All tutors</SelectItem>
             {tutorsList.map((tutor) => (
               <SelectItem key={tutor.id} value={tutor.id.toString()}>
                 {tutor.username}

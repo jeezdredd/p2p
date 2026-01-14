@@ -26,12 +26,12 @@ type MaterialFormData = z.infer<typeof materialSchema>
 export default function Materials() {
   const queryClient = useQueryClient()
   const [showForm, setShowForm] = useState(false)
-  const [filterSubject, setFilterSubject] = useState<string>('')
+  const [filterSubject, setFilterSubject] = useState<string>('all')
   const [selectedFile, setSelectedFile] = useState<File | null>(null)
 
   const { data: materials, isLoading } = useQuery({
     queryKey: ['materials', filterSubject],
-    queryFn: () => materialsApi.list(filterSubject ? { subject: parseInt(filterSubject) } : {}),
+    queryFn: () => materialsApi.list(filterSubject && filterSubject !== 'all' ? { subject: parseInt(filterSubject) } : {}),
   })
 
   const { data: subjects } = useQuery({
@@ -158,7 +158,7 @@ export default function Materials() {
             <SelectValue placeholder="Filter by subject" />
           </SelectTrigger>
           <SelectContent>
-            <SelectItem value="">All subjects</SelectItem>
+            <SelectItem value="all">All subjects</SelectItem>
             {subjectsList.map((subject) => (
               <SelectItem key={subject.id} value={subject.id.toString()}>
                 {subject.name}

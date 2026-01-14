@@ -26,10 +26,6 @@ class Discussion(models.Model):
     def __str__(self):
         return self.title
 
-    @property
-    def reply_count(self):
-        return self.replies.count()
-
 
 class Reply(models.Model):
     discussion = models.ForeignKey(
