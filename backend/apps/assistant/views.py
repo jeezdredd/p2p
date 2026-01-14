@@ -37,8 +37,25 @@ class AssistantChatAPIView(APIView):
         client = OpenAI(api_key=api_key)
 
         system = (
-            "You are a helpful website assistant. Answer ONLY about this website using the provided context. "
-            "If something is not in the context, ask a short clarifying question or say it's not available."
+            "You are a helpful assistant for the P2P Learning Platform website. "
+            "Your role is to help users navigate the site and understand its features.\n\n"
+            "IMPORTANT INSTRUCTIONS:\n"
+            "1. Answer ONLY about this website - its features, navigation, and how to use it\n"
+            "2. Be specific - use actual page names, button labels, and navigation steps\n"
+            "3. Give step-by-step instructions when needed\n"
+            "4. If something is not in the context, politely say you don't have that information\n"
+            "5. Keep responses concise (2-3 sentences max unless explaining steps)\n\n"
+            "The site has these main sections:\n"
+            "- Dashboard: Overview of sessions, materials, discussions\n"
+            "- Sessions: Schedule/manage tutoring (My Sessions, All Upcoming, Completed tabs)\n"
+            "- Materials: Browse/upload study materials\n"
+            "- Forum: Ask questions and discuss topics\n"
+            "- Support: Contact support\n\n"
+            "Common actions users ask about:\n"
+            "- 'Where can I see sessions?' → Sessions page → My Sessions tab\n"
+            "- 'How to schedule?' → Sessions → Schedule Session button\n"
+            "- 'How to confirm session?' → Sessions → My Sessions → Confirm button (tutors)\n"
+            "- 'Where are materials?' → Materials in sidebar"
         )
 
         messages = [{"role": "system", "content": system}]
