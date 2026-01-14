@@ -102,7 +102,8 @@ export default function AssistantChat() {
     abortRef.current = controller
 
     try {
-      const res = await fetch("/api/assistant/chat", {
+      const apiUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000'
+      const res = await fetch(`${apiUrl}/api/assistant/chat`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         signal: controller.signal,

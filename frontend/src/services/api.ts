@@ -87,9 +87,11 @@ export const sessionsApi = {
     api.get('/sessions/upcoming/', { params }),
   completed: (params?: { subject?: number; tutor?: number }) =>
     api.get('/sessions/completed/', { params }),
+  my: () => api.get('/sessions/my/'),
   get: (id: number) => api.get(`/sessions/${id}/`),
   create: (data: {
-    tutor: number
+    tutor?: number
+    student?: number
     subject: number
     title: string
     date: string
@@ -98,6 +100,16 @@ export const sessionsApi = {
   }) => api.post('/sessions/', data),
   update: (id: number, data: Partial<{ status: string; notes: string }>) =>
     api.patch(`/sessions/${id}/`, data),
+  confirm: (id: number) => api.post(`/sessions/${id}/confirm/`),
+  cancel: (id: number, reason?: string) =>
+    api.post(`/sessions/${id}/cancel/`, { reason }),
+  reviews: {
+    list: () => api.get('/sessions/reviews/'),
+    create: (data: { session: number; rating: number; comment?: string }) =>
+      api.post('/sessions/reviews/', data),
+    update: (id: number, data: { rating: number; comment?: string }) =>
+      api.patch(`/sessions/reviews/${id}/`, data),
+  },
 }
 
 export const forumApi = {
