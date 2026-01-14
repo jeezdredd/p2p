@@ -16,7 +16,9 @@ A collaborative academic platform where students can share learning resources, s
 - TanStack Query + Zustand
 - Tailwind CSS + shadcn/ui
 
-## Local Development
+For local development:
+docker compose down -v
+docker compose up --build
 
 ### With Docker (Recommended)
 
