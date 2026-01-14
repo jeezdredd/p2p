@@ -28,7 +28,7 @@ INSTALLED_APPS = [
     'channels',
     'apps.users',
     'apps.materials',
-    'apps.sessions',
+    'apps.tutoring',
     'apps.forum',
     'apps.support',
     'apps.notifications',
