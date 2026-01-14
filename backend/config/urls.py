@@ -11,7 +11,7 @@ urlpatterns = [
     path('api/auth/', include('apps.users.urls')),
     path('api/users/', include('apps.users.urls_users')),
     path('api/materials/', include('apps.materials.urls')),
-    path('api/sessions/', include('apps.sessions.urls')),
+    path('api/sessions/', include('apps.tutoring.urls')),
     path('api/discussions/', include('apps.forum.urls')),
     path('api/support/', include('apps.support.urls')),
 ]
